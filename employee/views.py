@@ -102,13 +102,141 @@ def profile(request):
 def admin_login(request):
     return render(request, 'admin_login.html')
 
+
 def my_experience(request):
     if not request.user.is_authenticated:
         return redirect('emplogin')
     
     user = request.user
+    experience = EmployeeExperience.objects.get(user=user)
     
 
     return render(request,'my_experience.html',locals())
 
-   
+
+def edit_experience(request):
+    if not request.user.is_authenticated:
+        return redirect('emplogin')
+
+    error = ""
+    user = request.user
+    experience = EmployeeExperience.objects.get(user=user)
+    
+    if request.method == "POST":
+        cn1 = request.POST['company1name']
+        jd1 = request.POST['company1deg']
+        js1 = request.POST['company1salary']
+        jduration1 = request.POST['company1duration']
+        cn2 = request.POST['company2name']
+        jd2 = request.POST['company2deg']
+        js2 = request.POST['company2salary']
+        jduration2 = request.POST['company2duration']
+        cn3 = request.POST['company3name']
+        jd3 = request.POST['company3deg']
+        js3 = request.POST['company3salary']
+        jduration3 = request.POST['company3duration']
+        
+        
+        experience.company1name = cn1
+        experience.company1deg = jd1
+        experience.company1salary = js1
+        experience.company1duration = jduration1
+        experience.company2name = cn2
+        experience.company2deg = jd2
+        experience.company2salary = js2
+        experience.company2duration = jduration2
+        experience.company3name = cn3
+        experience.company3deg = jd3
+        experience.company3salary = js3
+        experience.company3duration = jduration3
+
+        try:
+            experience.save()
+
+            error = "no"
+        except:
+            error = "yes"
+
+    return render(request, 'edit_experience.html', locals())
+
+def my_education(request):
+    if not request.user.is_authenticated:
+        return redirect('emplogin')
+    
+    user = request.user
+    education = EmployeeEducation.objects.get(user=user)
+    
+
+    return render(request,'my_education.html',locals())
+
+
+def edit_education(request):
+    if not request.user.is_authenticated:
+        return redirect('emplogin')
+
+    error = ""
+    user = request.user
+    education = EmployeeEducation.objects.get(user=user)
+    
+    if request.method == "POST":
+        pgcourse = request.POST['pgcourse']
+        pgclg = request.POST['pgclg']
+        pgpassingyear = request.POST['pgpassingyear']
+        pgpercentage = request.POST['pgpercentage']
+
+        gradcourse = request.POST['gradcourse']
+        gradclg = request.POST['gradclg']
+        gradpassingyear = request.POST['gradpassingyear']
+        gradpercentage = request.POST['gradpercentage']
+
+        ssccourse = request.POST['ssccourse']
+        sscclg = request.POST['sscclg']
+        sscpassingyear = request.POST['sscpassingyear']
+        sscpercentage = request.POST['sscpercentage']
+
+        hsccourse = request.POST['hsccourse']
+        hscclg = request.POST['hscclg']
+        hscpassingyear = request.POST['hscpassingyear']
+        hscpercentage = request.POST['hscpercentage']
+        
+        
+        education.coursepg = pgcourse
+        education.schoolclgpg = pgclg
+        education.yearofpassingpg = pgpassingyear
+        education.percentagepg = pgpercentage
+        education.coursegra = gradcourse
+        education.schoolclggra = gradclg
+        education.yearofpassinggra = gradpassingyear
+        education.percentagegra = gradpercentage
+        education.coursessc = ssccourse
+        education.schoolclgssc = sscclg
+        education.yearofpassingssc = sscpassingyear
+        education.percentagessc = sscpercentage
+        education.coursehsc = hsccourse
+        education.schoolclghsc = hscclg
+        education.yearofpassinghsc = hscpassingyear
+        education.percentagehsc = hscpercentage
+
+        if pgpassingyear:
+            education.yearofpassingpg = pgpassingyear
+
+        if gradpassingyear:
+            education.yearofpassinggra = gradpassingyear
+
+        if sscpassingyear:
+            education.yearofpassingssc = sscpassingyear
+
+        if hscpassingyear:
+            education.yearofpassinghsc = hscpassingyear
+       
+
+        try:
+            education.save()
+
+            error = "no"
+        except:
+            error = "yes"
+
+    return render(request, 'edit_education.html', locals())
+
+ 
