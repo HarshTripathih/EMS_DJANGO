@@ -1,0 +1,29 @@
+{% extends 'emp_base.html' %}
+
+
+{% block main %}
+
+
+<div class="card shadow m-2">
+    <div class="card-body">
+        <h5 class="p-2 text-danger" style="border-bottom :2px solid orange">My Work Experience</h5>
+        <div class="container-fluid">
+            
+        </div>
+    </div>
+</div>
+
+{% comment %} {% if error == "no" %}
+<script>
+    alert("Profile Updated Successfully");
+    window.location = ('{% url 'profile' %}');
+</script>
+{% endif %}
+{% if error == "yes" %}
+<script>
+    alert("Something Went wrong, Try again...");
+</script>
+
+{% endif %} {% endcomment %}
+
+{% endblock %}
