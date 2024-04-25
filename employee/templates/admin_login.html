@@ -1,6 +1,4 @@
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -47,7 +45,18 @@
                 </div>
             </div>
         </div>
-    </div>
-    
+    </div>  
 </body>
-</html>
+
+{% if error == "no" %}
+<script>
+    alert("Admin Login Successfull");
+    window.location = ('{% url 'admin_home' %}');
+</script>
+{% endif %}
+{% if error == "yes" %}
+<script>
+    alert("Invalid Login Credentials, Try again...");
+</script>
+
+{% endif %}

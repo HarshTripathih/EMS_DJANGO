@@ -1,0 +1,53 @@
+{% extends 'admin_base.html' %}
+
+
+{% block main %}
+
+<head>
+   
+
+</head>
+
+
+<div class="card shadow m-2">
+    <div class="card-body">
+        <h5 class="p-2 text-danger" style="border-bottom :2px solid orange">All Employee Details</h5>
+        <div class="container-fluid">
+            <table table id="example" class="table table-bordered table-hover">
+                <thead class="text-light bg-danger">
+                    <tr>
+                        <th>S No.</th>
+                        <th>Employee Code</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Email ID</th>
+                        <th>Contact Number</th>
+                        <th>Joining Date</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in employee %}
+                    <tr>
+                        <td>{{forloop.counter}}</td>
+                        <td>{{i.empcode}}</td>
+                        <td>{{i.user.first_name}}</td>
+                        <td>{{i.user.last_name}}</td>
+                        <td>{{i.user.username}}</td>
+                        <td>{{i.contact}}</td>
+                        <td>{{i.joiningdate}}</td>
+                        <td><a href="{% url 'edit_profile' i.id %}" class="text-primary"></a>
+                            <a href="{% url 'delete_employee' i.user.id %}"></a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+{% endblock %}

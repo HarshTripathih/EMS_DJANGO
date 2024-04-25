@@ -100,7 +100,33 @@ def profile(request):
 
 
 def admin_login(request):
-    return render(request, 'admin_login.html')
+
+    error = ""
+    if request.method == "POST":
+        u = request.POST['username']
+        p = request.POST['pwd']
+
+        user = authenticate(username=u, password=p)
+
+        try:
+
+            if user.is_staff:
+                login(request,user)
+                error = "no"
+            else:
+                error = "yes"
+
+        except:
+                error = "yes"        
+
+    return render(request, 'admin_login.html',locals())
+
+def admin_home(request):
+    if not request.user.is_authenticated:
+        return redirect('admin_login')
+    return render(request, 'admin_home.html')
+
+
 
 
 def my_experience(request):
@@ -238,5 +264,65 @@ def edit_education(request):
             error = "yes"
 
     return render(request, 'edit_education.html', locals())
+
+
+
+def change_password(request):
+    if not request.user.is_authenticated:
+        return redirect('emplogin')
+
+    error = ""
+    user = request.user
+
+    if request.method == "POST":
+        cur = request.POST['currentpassword']
+        new = request.POST['newpassword']
+
+
+        try:
+            if user.check_password(cur): 
+                user.set_password(new)
+                user.save()
+                error = "no"
+            else:
+                error = "not"
+        except:
+            error = "yes"
+
+    return render(request, 'change_password.html', locals())
+
+
+def change_adminpassword(request):
+    if not request.user.is_authenticated:
+        return redirect('admin_login')
+
+    error = ""
+    user = request.user
+
+    if request.method == "POST":
+        cur = request.POST['currentpassword']
+        new = request.POST['newpassword']
+
+
+        try:
+            if user.check_password(cur): 
+                user.set_password(new)
+                user.save()
+                error = "no"
+            else:
+                error = "not"
+        except:
+            error = "yes"
+
+    return render(request, 'change_adminpassword.html', locals())
+
+def all_employee(request):
+    if not request.user.is_authenticated:
+        return redirect('admin_login')
+    
+    employee = EmployeeDetail.objects.all()
+    return render(request, 'all_employee.html',locals())
+
+
 
  
