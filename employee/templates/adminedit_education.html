@@ -1,0 +1,117 @@
+{% extends 'admin_base.html' %}
+
+
+{% block main %}
+
+
+<div class="card shadow m-2">
+    <div class="card-body">
+        <h5 class="p-2 text-danger" style="border-bottom :2px solid orange">Edit Employee Education Details</h5>
+        <div class="container-fluid">
+            <form method="POST">
+                {% csrf_token %}
+                <table class="table table-bordered">
+                    <tr>
+                        <th>Post Graduation Course</th>
+                        <td><input type="text" name="pgcourse" class="form-control"
+                                value="{{education.coursepg}}"></td>
+                    </tr>
+                    <tr>
+                        <th>Post Graduation College/School</th>
+                        <td><input type="text" name="pgclg" class="form-control"
+                                value="{{education.schoolclgpg}}"></td>
+                    </tr>
+                    <tr>
+                        <th>Post Graduation Passing Year</th>
+                        <td><input type="date" name="pgpassingyear" class="form-control"
+                                value="{{education.yearofpassingpg}}"></td>
+                    </tr>
+                    <tr>
+                        <th>Post Graduation Percentage</th>
+                        <td><input type="text" name="pgpercentage" class="form-control"
+                                value="{{education.percentagepg}}"></td>
+                    </tr>
+                    
+                    <tr>
+                        <th>Graduation Course</th>
+                        <td><input type="text" name="gradcourse" class="form-control"
+                                value="{{education.coursegra}}"></td>
+                    </tr>
+                    <tr>
+                        <th>Graduation College/School</th>
+                        <td><input type="text" name="gradclg" class="form-control"
+                                value="{{education.schoolclggra}}"></td>
+                    </tr>
+                    <tr>
+                        <th>Graduation Passing Year</th>
+                        <td><input type="date" name="gradpassingyear" class="form-control"
+                                value="{{education.yearofpassinggra}}"></td>
+                    </tr>
+                    <tr>
+                        <th>Graduation Percentage</th>
+                        <td><input type="text" name="gradpercentage" class="form-control"
+                                value="{{education.percentagegra}}"></td>
+                    </tr>
+
+                    <tr>
+                        <th>Senior Secondary Course</th>
+                        <td><input type="text" name="ssccourse" class="form-control"
+                                value="{{education.coursessc}}"></td>
+                    </tr>
+                    <tr>
+                        <th>Senior Secondary College/School</th>
+                        <td><input type="text" name="sscclg" class="form-control"
+                                value="{{education.schoolclgssc}}"></td>
+                    </tr>
+                    <tr>
+                        <th>Senior Secondary Passing Year</th>
+                        <td><input type="date" name="sscpassingyear" class="form-control"
+                                value="{{education.yearofpassingssc}}"></td>
+                    </tr>
+                    <tr>
+                        <th>Senior Secondary Percentage</th>
+                        <td><input type="text" name="sscpercentage" class="form-control"
+                                value="{{education.percentagessc}}"></td>
+                    </tr>
+
+                    <tr>
+                        <th>Higher Secondary Course</th>
+                        <td><input type="text" name="hsccourse" class="form-control"
+                                value="{{education.coursehsc}}"></td>
+                    </tr>
+                    <tr>
+                        <th>Higher Secondary College/School</th>
+                        <td><input type="text" name="hscclg" class="form-control"
+                                value="{{education.schoolclghsc}}"></td>
+                    </tr>
+                    <tr>
+                        <th>Higher Secondary Passing Year</th>
+                        <td><input type="date" name="hscpassingyear" class="form-control"
+                                value="{{education.yearofpassinghsc}}"></td>
+                    </tr>
+                    <tr>
+                        <th>Higher Secondary Percentage</th>
+                        <td><input type="text" name="hscpercentage" class="form-control"
+                                value="{{education.percentagehsc}}"></td>
+                    </tr>
+                </table>
+                <center><input type="submit" class="btn btn-primary px-5 m-2" value="Submit"></center>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% if error == "no" %}
+<script>
+    alert("Employee Education Updated Successfully");
+    window.location = ('{% url 'adminedit_education' education.user.id %}');
+</script>
+{% endif %}
+{% if error == "yes" %}
+<script>
+    alert("Something Went wrong, Try again...");
+</script>
+
+{% endif %}
+
+{% endblock %}

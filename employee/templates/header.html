@@ -25,13 +25,13 @@
     <div class="collapse navbar-collapse" id="collapsibleNavbar">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'index' %}"><i class="fa fa-home" aria-hidden="true"></i> Home</a>
+          <a class="nav-link {% if request.path == '/' %} active {% endif %}" href="{% url 'index' %}"><i class="fa fa-home" aria-hidden="true"></i> Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'registration' %}">Employee Signup</a>
+          <a class="nav-link {% if request.path == '/registration/' %} active {% endif %}" href="{% url 'registration' %}">Employee Signup</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'emplogin' %}"><i class="fa fa-sign-in-alt" aria-hidden="true"></i> Employee Login</a>
+          <a class="nav-link {% if request.path == '/emplogin/' %} active {% endif %}" href="{% url 'emplogin' %}"><i class="fa fa-sign-in-alt" aria-hidden="true"></i> Employee Login</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="{% url 'admin_login' %}"><i class="fa fa-sign-in-alt" aria-hidden="true"></i> Admin Login</a>

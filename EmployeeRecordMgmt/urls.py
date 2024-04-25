@@ -34,5 +34,9 @@ urlpatterns = [
     path('admin_home/',admin_home,name="admin_home"),
     path('change_adminpassword/',change_adminpassword,name="change_adminpassword"),
     path('all_employee/',all_employee,name="all_employee"),
+    path('delete_employee/<int:pid>/', delete_employee, name="delete_employee"),
+    path('edit_profile/<int:pid>/', edit_profile, name="edit_profile"),
+    path('adminedit_education/<int:pid>/', adminedit_education, name="adminedit_education"),
+    path('adminedit_experience/<int:pid>/',adminedit_experience,name="adminedit_experience"),
 
 ]
