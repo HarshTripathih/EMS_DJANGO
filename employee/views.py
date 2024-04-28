@@ -77,7 +77,7 @@ def profile(request):
         
 
         employee.user.first_name = fn
-        employee.user.first_name = ln
+        employee.user.last_name = ln
         employee.empcode = ec
         employee.empdept = dept
         employee.designation = designation
@@ -325,11 +325,11 @@ def all_employee(request):
 
 def edit_profile(request,pid):
     if not request.user.is_authenticated:
-        return redirect('emplogin')
+        return redirect('admin_login')
 
     error = ""
-    user = User.objects.get(id=pid)
-    employee = EmployeeDetail.objects.get(user=user)
+
+    employee = EmployeeDetail.objects.get(id=pid)
     
     if request.method == "POST":
         fn = request.POST['firstname']
@@ -343,7 +343,7 @@ def edit_profile(request,pid):
         
 
         employee.user.first_name = fn
-        employee.user.first_name = ln
+        employee.user.last_name = ln
         employee.empcode = ec
         employee.empdept = dept
         employee.designation = designation
@@ -365,28 +365,10 @@ def edit_profile(request,pid):
 
 def delete_employee(request,pid):
     if not request.user.is_authenticated:
-        return redirect('emplogin')
-
-    error = ""
-    
-    if request.method == "POST":
-        
-        try:
-            user = User.objects.get(id=pid)
-            employee = EmployeeDetail.objects.get(user=user)
-            
-            # Delete related objects if necessary
-            # For example:
-            # education = EmployeeEducation.objects.get(user=user)
-            # education.delete()
-            
-            user.delete()
-            employee.delete()
-            
-            error = "no"
-        except:
-            error = "yes"
-    return render(request,'delete_employee.html',locals())
+        return redirect('admin_login')
+    user = User.objects.get(id=pid)
+    user.delete()
+    return redirect('all_employee')
 
 def adminedit_education(request,pid):
     if not request.user.is_authenticated:
